@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Axios — Get the App</title>
+  <meta name="description" content="Download the Axios mobile app for iOS and Android." />
+  <meta property="og:title" content="Axios — Get the App" />
+  <meta property="og:description" content="Download the Axios mobile app for iOS and Android." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root {
+      --bg: 245 245 250;          /* soft slate */
+      --primary: 14 165 233;      /* sky-500 */
+      --primary-dark: 2 132 199;  /* sky-600 */
+      --card: 255 255 255;
+      --text: 17 24 39;           /* gray-900 */
+      --muted: 107 114 128;       /* gray-500 */
+      --ring: 186 230 253;        /* sky-200 */
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: rgb(var(--text));
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(var(--primary), .25), transparent 60%),
+                  radial-gradient(1000px 700px at 120% 10%, rgba(var(--primary), .18), transparent 60%),
+                  rgb(var(--bg));
+      display: grid;
+      place-items: center;
+      padding: 32px;
+    }
+    .card {
+      width: min(950px, 92vw);
+      background: rgba(var(--card), 0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(2, 132, 199, .10), 0 2px 10px rgba(2, 132, 199, .06);
+      border: 1px solid rgba(var(--ring), .8);
+      overflow: hidden;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 28px;
+      padding: clamp(24px, 4vw, 48px);
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    .brand {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
+    }
+    .logo {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-dark)) 100%);
+      display: grid; place-items: center;
+      color: white; font-weight: 800; font-size: 22px; letter-spacing: .5px;
+      box-shadow: inset 0 0 14px rgba(255,255,255,.24), 0 8px 18px rgba(2,132,199,.25);
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
+    p.lead { margin: 10px 0 22px; color: rgb(var(--muted)); font-size: clamp(15px, 2.2vw, 18px); }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 18px; border-radius: 14px; text-decoration: none;
+      background: rgb(var(--text)); color: white; font-weight: 600;
+      transition: transform .05s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,.15);
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,.18); }
+
+    .btn--outline {
+      background: white; color: rgb(var(--text)); border: 1px solid rgba(0,0,0,.08);
+    }
+
+    .badges { display: flex; flex-direction: column; gap: 10px; }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
+      border-radius: 20px; padding: 18px; border: 1px solid rgba(0,0,0,.06);
+    }
+
+    .grid {
+      display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+    .qr {
+      display: grid; place-items: center; gap: 10px; text-align: center;
+      padding: 14px; border-radius: 16px; background: rgba(2,132,199,.05);
+      border: 1px dashed rgba(2,132,199,.25);
+    }
+    .qr img { width: 220px; height: 220px; border-radius: 12px; }
+    .qr small { color: rgb(var(--muted)); }
+
+    footer { text-align: center; padding: 18px 10px 26px; color: rgb(var(--muted)); font-size: 14px; }
+    .note { font-size: 12px; opacity: .9; }
+
+    /* simple decorative phone mock */
+    .mock {
+      position: relative; aspect-ratio: 9/19; border-radius: 30px; width: min(360px, 92%);
+      background: linear-gradient(160deg, rgba(2,132,199,.25), rgba(14,165,233,.15));
+      border: 1px solid rgba(2,132,199,.25); margin: auto; box-shadow: inset 0 0 32px rgba(2,132,199,.15);
+    }
+    .mock::before { content:""; position:absolute; inset: 10px; border-radius: 24px; background: white; box-shadow: 0 8px 26px rgba(2,132,199,.25) inset; }
+    .mock::after { content:""; position:absolute; top: 8px; left: 50%; translate: -50% 0; width: 30%; height: 6px; border-radius: 999px; background: rgba(0,0,0,.1); }
+    .mock-inner { position: absolute; inset: 26px; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, rgba(14,165,233,.15), rgba(2,132,199,.05)); display:grid; place-items:center; }
+    .mock-title { font-weight: 800; letter-spacing:.4px; font-size: 22px; color: rgb(var(--primary-dark)); }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <section class="hero">
+      <div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">AX</div>
+          <div>
+            <h1>Axios — Get the App</h1>
+            <p class="lead">Fast, simple, beautiful. Download Axios for iPhone and Android, or scan a QR code to open the store directly on your device.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="grid">
+            <div class="badges">
+              <a class="btn" href="https://apps.apple.com/app/axios/id1640682876" target="_blank" rel="noopener">
+                <!-- Apple icon -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.665 16.135c-.335.772-.73 1.476-1.187 2.108-.623.854-1.127 1.442-1.515 1.763-.606.557-1.255.843-1.947.858-.498 0-1.1-.142-1.806-.427-.707-.285-1.357-.427-1.95-.427-.62 0-1.287.142-2 .427-.714.285-1.291.435-1.732.45-.668.028-1.33-.27-1.984-.896-.423-.37-.95-1.005-1.58-1.905-.678-.97-1.233-2.094-1.666-3.372-.467-1.368-.7-2.688-.7-3.96 0-1.465.316-2.73.948-3.794.495-.85 1.155-1.53 1.98-2.04.825-.512 1.716-.776 2.672-.792.525 0 1.214.163 2.067.49.852.327 1.4.492 1.645.492.18 0 .777-.187 1.792-.56.961-.347 1.772-.49 2.43-.427 1.796.145 3.147.851 4.052 2.117-1.608.975-2.41 2.342-2.41 4.102 0 1.368.51 2.509 1.53 3.42.455.427.966.755 1.53.984-.122.355-.252.692-.39 1.012ZM15.95 1.68c0 1.095-.4 2.115-1.2 3.058-.966 1.137-2.133 1.791-3.402 1.689-.014-.13-.022-.266-.022-.406 0-1.053.457-2.178 1.268-3.054.404-.46.92-.84 1.547-1.142.626-.3 1.22-.468 1.78-.504.02.12.03.235.03.36Z"/></svg>
+                <span>Download on the App Store</span>
+              </a>
+              <a class="btn btn--outline" href="https://play.google.com/store/apps/details?id=com.service.axios" target="_blank" rel="noopener">
+                <!-- Android icon -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48h1.2a1.2 1.2 0 0 1 1.2 1.2v6.72a1.2 1.2 0 0 1-1.2 1.2h-1.2a1.2 1.2 0 0 1-1.2-1.2V10.68a1.2 1.2 0 0 1 1.2-1.2Zm-12 0h1.2a1.2 1.2 0 0 1 1.2 1.2v6.72a1.2 1.2 0 0 1-1.2 1.2H5.6a1.2 1.2 0 0 1-1.2-1.2V10.68a1.2 1.2 0 0 1 1.2-1.2ZM7.92 8.16h8.16V18a1.92 1.92 0 0 1-1.92 1.92H9.84A1.92 1.92 0 0 1 7.92 18V8.16Zm8.52-3.12 1.32-2.28a.48.48 0 1 1 .84.48l-1.38 2.37a5.64 5.64 0 0 1 2.04 3.27H4.74a5.64 5.64 0 0 1 2.04-3.27L5.4 3.24a.48.48 0 0 1 .84-.48l1.32 2.28A6.708 6.708 0 0 1 16.44 5.04Zm-7.2 2.16a.6.6 0 1 0 0-1.2.6.6 0 0 0 0 1.2Zm5.52 0a.6.6 0 1 0 0-1.2.6.6 0 0 0 0 1.2Z"/></svg>
+                <span>Get it on Google Play</span>
+              </a>
+            </div>
+            <div class="grid">
+              <div class="qr">
+                <img alt="QR code for iOS" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fapps.apple.com%2Fapp%2Faxios%2Fid1640682876" />
+                <small>Scan for iPhone / iPad</small>
+              </div>
+              <div class="qr">
+                <img alt="QR code for Android" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.service.axios" />
+                <small>Scan for Android</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">Trouble opening the store? Copy the links: <a href="https://apps.apple.com/app/axios/id1640682876">apps.apple.com/app/axios</a> • <a href="https://play.google.com/store/apps/details?id=com.service.axios">play.google.com/store/apps/details?id=com.service.axios</a></p>
+      </div>
+
+      <div style="display:grid; place-items:center;">
+        <div class="mock">
+          <div class="mock-inner">
+            <div class="mock-title">Axios</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>© <span id="year"></span> Axios. All rights reserved.</footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
