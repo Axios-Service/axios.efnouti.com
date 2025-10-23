@@ -1,130 +1,375 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Axios — Sunday School App</title>
-  <meta name="description" content="Axios is the Sunday School service app for our churches — helping teachers, students, and families stay in step with lessons, attendance, and resources." />
-  <meta property="og:title" content="Axios — Sunday School App" />
-  <meta property="og:description" content="Download Axios for iOS and Android." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://axios.efnouti.com/" />
-  <meta property="og:image" content="axios-logo.png" />
-  <meta name="theme-color" content="#0b0e14" />
-  <link rel="icon" href="axios-logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b0e14;
-      --panel:#121726;
-      --panel-2:#0f1422;
-      --text:#e6e8ee;
-      --muted:#a7b0c0;
-      --accent-a:#ff6759;
-      --accent-b:#ffb44a;
-      --accent-c:#6ea8fe;
-      --accent-d:#7cfecc;
-      --btn:#1c2338;
-      --ring:rgba(110,168,254,.35);
-      --radius:16px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans"; color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 85% -10%, rgba(124,254,204,.12), transparent 60%),
-        radial-gradient(1200px 600px at -10% 100%, rgba(110,168,254,.14), transparent 60%),
-        var(--bg);
-    }
-    .wrap{display:grid; min-height:100%; place-items:center; padding:48px 20px}
-    .card{width:min(980px,100%); background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow:0 10px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.035); padding:clamp(20px, 4vw, 40px); position:relative; overflow:hidden}
-    h1{font-size:clamp(28px, 4vw, 44px); line-height:1.15; margin:14px 0 10px; letter-spacing:-.01em}
-    p.lead{color:var(--muted); font-size:clamp(16px, 2.2vw, 18px); margin:0 0 22px}
-    .cta-row{display:flex; gap:14px; flex-wrap:wrap}
-    .cta, .store{display:inline-flex; align-items:center; gap:12px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:var(--btn); color:var(--text); text-decoration:none; font-weight:600; letter-spacing:.2px; transition:transform .06s ease, box-shadow .2s ease, background .2s ease}
-    .cta:hover, .store:hover{transform:translateY(-1px); box-shadow:0 10px 32px var(--ring)}
-    .cta.primary{background:linear-gradient(135deg, var(--accent-a), var(--accent-b) 33%, var(--accent-c) 66%, var(--accent-d)); color:#0b0e14; border-color:transparent}
-    .lang-switch{margin-inline-start:auto; display:inline-flex; gap:8px; align-items:center}
-    .lang-switch button{background:var(--btn); color:var(--text); border:1px solid rgba(255,255,255,.08); padding:8px 10px; border-radius:10px; cursor:pointer}
-    .divider{height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); margin:28px 0}
-    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-    @media (max-width:800px){.features{grid-template-columns:1fr; text-align:left}}
-    .feat{background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:16px}
-    .feat h3{margin:0 0 8px; font-size:16px}
-    .feat p{margin:0; color:var(--muted); font-size:14px}
-    .stores{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
-    .badge-img{height:48px; width:auto; display:block}
-    footer{margin-top:20px; font-size:13px; color:var(--muted); text-align:center}
-    [dir="rtl"] .cta-row,[dir="rtl"] .stores{flex-direction:row-reverse}
-    [dir="rtl"] .features{text-align:right}
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Axios — Sunday School App</title>
+    <meta name="description"
+        content="Axios is the Sunday School service app for our churches — helping teachers, students, and families stay in step with lessons, attendance, and resources." />
+    <meta property="og:title" content="Axios — Sunday School App" />
+    <meta property="og:description" content="Download Axios for iOS and Android." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://axios.efnouti.com/" />
+    <meta property="og:image" content="axios-logo.png" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0e14">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="axios-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0b0e14;
+            --panel: #121726;
+            --panel-2: #0f1422;
+            --text: #e6e8ee;
+            --muted: #a7b0c0;
+            --accent-a: #ff6759;
+            --accent-b: #ffb44a;
+            --accent-c: #6ea8fe;
+            --accent-d: #7cfecc;
+            --btn: #1c2338;
+            --ring: rgba(110, 168, 254, .35);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+            color: var(--text);
+            background:
+                radial-gradient(1200px 600px at 85% -10%, rgba(124, 254, 204, .12), transparent 60%),
+                radial-gradient(1200px 600px at -10% 100%, rgba(110, 168, 254, .14), transparent 60%),
+                var(--bg);
+        }
+
+        .wrap {
+            display: grid;
+            min-height: 100%;
+            place-items: center;
+            padding: 48px 20px
+        }
+
+        .card {
+            width: min(980px, 100%);
+            background: linear-gradient(180deg, var(--panel), var(--panel-2));
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .035);
+            padding: clamp(20px, 4vw, 40px);
+            position: relative;
+            overflow: hidden
+        }
+
+        h1 {
+            font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.15;
+            margin: 14px 0 10px;
+            letter-spacing: -.01em
+        }
+
+        p.lead {
+            color: var(--muted);
+            font-size: clamp(16px, 2.2vw, 18px);
+            margin: 0 0 22px
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .cta,
+        .store {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: var(--btn);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: .2px;
+            transition: transform .06s ease, box-shadow .2s ease, background .2s ease
+        }
+
+        .cta:hover,
+        .store:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 32px var(--ring)
+        }
+
+        .cta.primary {
+            background: linear-gradient(135deg, var(--accent-a), var(--accent-b) 33%, var(--accent-c) 66%, var(--accent-d));
+            color: #0b0e14;
+            border-color: transparent
+        }
+
+        .lang-switch {
+            margin-inline-start: auto;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .lang-switch button {
+            background: var(--btn);
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 8px 10px;
+            border-radius: 10px;
+            cursor: pointer
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
+            margin: 28px 0
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        @media (max-width:800px) {
+            .features {
+                grid-template-columns: 1fr;
+                text-align: left
+            }
+        }
+
+        .feat {
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 12px;
+            padding: 16px
+        }
+
+        .feat h3 {
+            margin: 0 0 8px;
+            font-size: 16px
+        }
+
+        .feat p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        [dir="rtl"] .feat h3,
+        [dir="rtl"] .feat p {
+            text-align: right;
+        }
+
+        .stores {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center
+        }
+
+        .badge-img {
+            height: 48px;
+            width: auto;
+            display: block
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center
+        }
+
+        .badge-img[alt="Google Play"] {
+            transform: scale(1.1);
+            /* Adjust 1.05–1.10 as needed */
+            transform-origin: center;
+            height: 55px;
+            /* Apple badge is 48px — this compensates visually */
+        }
+
+        [dir="rtl"] .cta-row,
+        [dir="rtl"] .stores {
+            flex-direction: row-reverse
+        }
+
+        [dir="rtl"] .features {
+            text-align: right
+        }
+
+        .axios-word {
+            background: linear-gradient(135deg, #ff6759, #ffb44a 33%, #6ea8fe 66%, #7cfecc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-size: 2em;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        [dir="rtl"] .axios-word {
+            font-size: 2em;
+        }
+
+        .mt-28 {
+            margin-top: 28px;
+        }
+    </style>
 </head>
+
 <body>
-  <main class="wrap">
-    <section class="card">
-      <h1 id="headline">Serve & grow with Axios</h1>
-      <p class="lead" id="lead">
-        Axios is the Sunday School service app for our churches — built to help teachers, students, and families stay in step with lessons, attendance, and resources.
-      </p>
-      <div class="cta-row">
-        <a class="cta primary" href="#" onclick="return smartRedirect()" id="cta-smart">Get the app</a>
-        <a class="cta" href="#stores" id="cta-stores">See store links</a>
-        <div class="lang-switch">
-          <button type="button" data-lang="en" aria-pressed="true">EN</button>
-          <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
-        </div>
-      </div>
+    <main class="wrap">
+        <section class="card">
+            <div class="cta-row">
+                <div class="lang-switch">
+                    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+                    <button type="button" data-lang="ar" aria-pressed="false">ع</button>
+                </div>
+            </div>
 
-      <div class="divider"></div>
-      <div class="features">
-        <div class="feat"><h3 id="f1-title">Built for churches</h3><p id="f1-text">Designed around Sunday School rhythms: classes, attendance, lessons, and follow-up.</p></div>
-        <div class="feat"><h3 id="f2-title">Simple & secure</h3><p id="f2-text">Clean experience with privacy-minded defaults for families and volunteers.</p></div>
-        <div class="feat"><h3 id="f3-title">On every device</h3><p id="f3-text">Available on iPhone, iPad, and Android.</p></div>
-      </div>
+            <h1 id="headline"><span class="axios-word">Axios</span>… for a fruitful ministry 30, 60, 100</h1>
+            <p class="lead" id="lead">Axios is the Sunday School service app for our churches — built to help teachers,
+                students, and families stay in step with lessons, attendance, and resources.</p>
 
-      <div id="stores" class="divider" style="margin-top:28px"></div>
-      <h2 id="dl-title">Download Axios</h2>
-      <div class="stores">
-        <a class="store" href="https://apps.apple.com/app/axios/id1640682876"><img class="badge-img" src="app-store-badge.svg" alt="App Store" /></a>
-        <a class="store" href="https://play.google.com/store/apps/details?id=com.service.axios"><img class="badge-img" src="google-play-badge.svg" alt="Google Play" /></a>
-      </div>
-      <footer>© 2022–<span id="year"></span> Axios. All rights reserved.</footer>
-    </section>
-  </main>
+            <div class="cta-row">
+                <a class="cta primary" href="#" onclick="return smartRedirect()" id="cta-smart">Get the app</a>
+            </div>
 
-<script>
-function smartRedirect(){
-  const ua = navigator.userAgent.toLowerCase();
-  if(/iphone|ipad|ipod|ios/.test(ua)) window.location.href='https://apps.apple.com/app/axios/id1640682876';
-  else if(/android/.test(ua)) window.location.href='https://play.google.com/store/apps/details?id=com.service.axios';
-  return false;
-}
+            <div class="divider"></div>
 
-const L = {
-  en:{headline:"Serve & grow with Axios",lead:"Axios is the Sunday School service app for our churches — built to help teachers, students, and families stay in step with lessons, attendance, and resources.",ctaSmart:"Get the app",ctaStores:"See store links",f1t:"Built for churches",f1d:"Designed around Sunday School rhythms: classes, attendance, lessons, and follow-up.",f2t:"Simple & secure",f2d:"Clean experience with privacy-minded defaults for families and volunteers.",f3t:"On every device",f3d:"Available on iPhone, iPad, and Android.",dl:"Download Axios"},
-  ar:{headline:"اخدم وانمُ مع أكسيـوس",lead:"أكسيـوس هو تطبيق خدمة مدارس الأحد لكنائسنا — مُصمّم لمساعدة الخدام، والطلاب، والأسر على متابعة الدروس والحضور والموارد.",ctaSmart:"نزّل التطبيق",ctaStores:"روابط المتاجر",f1t:"مصمّم للكنائس",f1d:"متوافق مع إيقاع مدارس الأحد: الفصول، الحضور، الدروس والمتابعة.",f2t:"سهل وآمن",f2d:"تجربة نظيفة مع إعدادات خصوصية مناسبة للأسر والمتطوعين.",f3t:"على كل الأجهزة",f3d:"متوفر على iPhone و iPad وأندرويد.",dl:"نزّل أكسيـوس"}
-};
-function setLang(l){
-  const t=L[l];
-  document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
-  document.getElementById('headline').textContent=t.headline;
-  document.getElementById('lead').textContent=t.lead;
-  document.getElementById('cta-smart').textContent=t.ctaSmart;
-  document.getElementById('cta-stores').textContent=t.ctaStores;
-  document.getElementById('f1-title').textContent=t.f1t;
-  document.getElementById('f1-text').textContent=t.f1d;
-  document.getElementById('f2-title').textContent=t.f2t;
-  document.getElementById('f2-text').textContent=t.f2d;
-  document.getElementById('f3-title').textContent=t.f3t;
-  document.getElementById('f3-text').textContent=t.f3d;
-  document.getElementById('dl-title').textContent=t.dl;
-  document.querySelectorAll('.lang-switch button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
-}
-document.querySelectorAll('.lang-switch button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
-document.getElementById('year').textContent=new Date().getFullYear();
-</script>
+            <div class="features">
+                <div class="feat">
+                    <h3 id="f1-title">Built for churches</h3>
+                    <p id="f1-text">Designed around Sunday School rhythms: classes, attendance, lessons, and follow-up.
+                    </p>
+                </div>
+                <div class="feat">
+                    <h3 id="f2-title">Simple & secure</h3>
+                    <p id="f2-text">Clean experience with privacy-minded defaults for families and volunteers.</p>
+                </div>
+                <div class="feat">
+                    <h3 id="f3-title">On every device</h3>
+                    <p id="f3-text">Available on iPhone, iPad, and Android.</p>
+                </div>
+            </div>
+
+            <div id="stores" class="divider mt-28"></div>
+            <h2 id="dl-title">Download Axios</h2>
+
+            <div class="stores">
+                <a class="store" href="https://apps.apple.com/app/axios/id1640682876"><img class="badge-img"
+                        src="app-store-badge.svg" alt="App Store" /></a>
+                <a class="store" href="https://play.google.com/store/apps/details?id=com.service.axios"><img
+                        class="badge-img" src="google-play-badge.svg" alt="Google Play" /></a>
+            </div>
+
+            <footer id="footer-text">© 2022–<span id="year"></span> Axios. All rights reserved.</footer>
+        </section>
+    </main>
+
+    <script>
+        function smartRedirect() {
+            const ua = navigator.userAgent.toLowerCase();
+            if (/iphone|ipad|ipod|ios/.test(ua))
+                window.location.href = 'https://apps.apple.com/app/axios/id1640682876';
+            else if (/android/.test(ua))
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.service.axios';
+            return false;
+        }
+
+        const L = {
+            en: {
+                headline: '<span class="axios-word">Axios</span>… for a fruitful ministry 30, 60, 100',
+                lead: "Axios is the Sunday School service app for our churches — designed to help servants and families stay in step with lessons, attendance, and ministry.",
+                ctaSmart: "Get the app",
+                f1t: "Built for churches",
+                f1d: "Designed around Sunday School rhythms: classes, attendance, lessons, and follow-up.",
+                f2t: "Simple & secure",
+                f2d: "Secure experience with privacy-minded defaults for families and servants.",
+                f3t: "On every device",
+                f3d: "Available on iPhone, iPad, and Android.",
+                dl: "Download Axios",
+                footer: "© 2022–{year} Axios. All rights reserved."
+            },
+            ar: {
+                headline: '<span class="axios-word">أكسيـوس</span>... لخدمةٍ مثمرة ٣٠، ٦٠، ١٠٠',
+                lead: "أكسيـوس هو تطبيق خدمة مدارس الأحد لكنائسنا — مُصمّم لمساعدة الخدام، والأسر على متابعة الدروس والحضور والخدمة.",
+                ctaSmart: "حمّل التطبيق الآن",
+                f1t: "مصمّم للكنائس",
+                f1d: "متوافق مع إيقاع مدارس الأحد: الفصول، الحضور، الدروس والمتابعة.",
+                f2t: "سهل وآمن",
+                f2d: "تجربة آمنة مع إعدادات خصوصية مناسبة للأسر والخدام.",
+                f3t: "على كل الأجهزة",
+                f3d: "متوفر على iPhone و iPad وأندرويد.",
+                dl: "حمّل أكسيـوس الآن",
+                footer: "© ٢٠٢٢–{year} أكسيـوس. جميع الحقوق محفوظة."
+            }
+        };
+
+        function setLang(l) {
+            const t = L[l];
+            const year = new Date().getFullYear();
+            function toArabicDigits(str) {
+                return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            }
+
+            document.documentElement.lang = l;
+            document.documentElement.dir = (l === 'ar' ? 'rtl' : 'ltr');
+
+            document.getElementById('headline').innerHTML = t.headline;
+            document.getElementById('lead').textContent = t.lead;
+            document.getElementById('cta-smart').textContent = t.ctaSmart;
+            document.getElementById('f1-title').textContent = t.f1t;
+            document.getElementById('f1-text').textContent = t.f1d;
+            document.getElementById('f2-title').textContent = t.f2t;
+            document.getElementById('f2-text').textContent = t.f2d;
+            document.getElementById('f3-title').textContent = t.f3t;
+            document.getElementById('f3-text').textContent = t.f3d;
+            document.getElementById('dl-title').textContent = t.dl;
+            const footerEl = document.getElementById('footer-text');
+            if (footerEl) {
+                if (l === 'ar') {
+                    footerEl.innerHTML = t.footer.replace('{year}', toArabicDigits(year));
+                } else {
+                    footerEl.innerHTML = t.footer.replace('{year}', year);
+                }
+            }
+
+            document.querySelectorAll('.lang-switch button').forEach(b =>
+                b.setAttribute('aria-pressed', String(b.dataset.lang === l))
+            );
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.lang-switch button').forEach(b =>
+                b.addEventListener('click', () => setLang(b.dataset.lang))
+            );
+
+            const initialLang = (navigator.language || 'en').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+            setLang(initialLang);
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
 </body>
+
 </html>
